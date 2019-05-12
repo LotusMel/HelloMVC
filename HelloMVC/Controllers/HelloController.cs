@@ -9,7 +9,14 @@ namespace HelloMVC.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+
+            return Content("<h1>Hello World</h1>", "text/html");
+        }
+
+        public IActionResult Goodbye()
+        {
+
+            return Content("Goodbye");
         }
     }
 }
