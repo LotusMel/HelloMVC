@@ -7,6 +7,7 @@ namespace HelloMVC.Controllers
     public class HelloController : Controller
     {
         // GET: /<controller>/
+        // Respond to query string. Pass string name to Index
         /*
         public IActionResult Index(string name)//Enables index to accept query
         {
@@ -21,10 +22,10 @@ namespace HelloMVC.Controllers
         */
 
         //Or...
-
-        public IActionResult Index()//Enables index to accept query
+        [HttpGet]
+        public IActionResult Index()
         {
-            string html = "<form method='post' action='/Hello/Display'>" +
+            string html = "<form method='post'>" +
                 "<input type='text' name='name' />" +
                 "<input type='submit' value='Greet me!' />" +
                 "</form>";
@@ -33,14 +34,29 @@ namespace HelloMVC.Controllers
         }
 
         //***Post request*** Form
-
+        // Change to display in various ways
+        [Route("/Hello")]
+        [HttpPost]
         public IActionResult Display(string name = "World")
+        {
+            return Content(string.Format("<h1>Hello {0}</h1>", name), "text/html");
+        }
+
+
+        // Handle requests to /Hello/NAME (URL segment)
+        [Route("/Hello/{name}")]
+        public IActionResult Index2(string name)
         {
             return Content(string.Format("<h1>Hello {0}</h1>", name), "text/html");
         }
         
 
         // /Hello/Goodbye
+        public IActionResult Goodbye()
+        {
+            return Content("Goodbye");
+        }
+
         // alter the route to this controller to be: /Hello/Aloha
         /*
         // Using 'Route Atribute'
@@ -50,12 +66,5 @@ namespace HelloMVC.Controllers
             return Content("Goodbye");
         }
         */
-        // Change to display in various ways
-        // Respond to query string. Pass string name to Index
-        public IActionResult Goodbye()
-        {
-            return Content("Goodbye");
-        }
-
     }
 }
