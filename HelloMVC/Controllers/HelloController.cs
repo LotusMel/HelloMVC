@@ -30,7 +30,7 @@ namespace HelloMVC.Controllers
                 "<input type='submit' value='Greet me!' />" +
                 "</form>";
 
-            return Content(html, "text/html");
+            return Redirect("/Hello/Goodbye");
         }
 
         //***Post request*** Form
